@@ -1,19 +1,14 @@
 .body_background 
 {
-    background-image: url("download.jpeg");
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXuUIrzNV5MFciiLZY2oHHkq_IUxN3iP2Dug&usqp=CAU");
     background-position: center;
-	background-size: 2000px 1350px;
-	background-repeat: no-repeat;
+    background-size: cover;
 }
 #myCanvas
 {
     border-width:10px;
     background-color: white; 
-	border-style:ridge;
-	margin-bottom: 100px;
-	background-image:url("images.jpeg");
-	background-repeat: no-repeat;
-	background-size: cover;
+    border-style:ridge;
 }
 
 h2

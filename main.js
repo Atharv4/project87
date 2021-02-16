@@ -1,54 +1,49 @@
-var canvas = new fabric.Canvas("myCanvas");
+var canvas= new fabric.Canvas('myCanvas');
 
-var hero_x = 10;
-var hero_y = 10;
+block_image_width = 30;
+block_image_height = 30;
 
-var hero_obj = "";
-var web_obj = "";
+player_x = 10;
+player_y = 10;
 
-var web_width = 30;
-var web_height = 30;
-var hero_width = 150;
-var hero_height = 140;
-background_image= "images.jpeg";
-spider_image= "spiderman.png";
+var player_object= " ";
+var block_image_object=" ";
 
-function add() {
-    background_imgTag = new Image();
-    background_imgTag.src = background_image;
+function player_update(){
+    fabric.Image.fromURL("player.png",function(Img) {
+        player_object= Img;
+    
+    player_object.scaleToWidth(150);
+    player_object.scaleToHeight(140);
+    player_object.set({
+        top:player_y,
+        left:player_x
 
-    imgspider = new Image();
-    imgspider.src = spider_image;
-}
-function uploadBackground() {
-    canvas.getContext().drawImage(background_imgTag, 0,0, canvas.width, canvas.height);
-}
-function hero_update() {
-    canvas.getContext().drawImage(background_imgTag, 0,0, canvas.width, canvas.height);
-    fabric.Image.fromURL("spiderman.png", function(Img){
-        hero_obj = Img; 
-        hero_obj.scaleToWidth(hero_width);
-        hero_obj.scaleToHeight(hero_height);
-        hero_obj.set({top:hero_y, left:hero_x});
-        canvas.add(hero_obj);
+    });
+    canvas.add(player_object);
     });
 }
-function new_web_update() {
-    canvas.remove(hero_obj);
-    fabric.Image.fromURL("web.png", function(Img){
-        web_obj = Img; 
-        web_obj.scaleToWidth(web_width);
-        web_obj.scaleToHeight(web_height);
-        web_obj.set({top:hero_y, left:hero_x});
-        canvas.add(web_obj);
-        uploadBackground();
-        hero_update();
+
+function new_image(get_image)
+{
+    fabric.Image.fromURL(get_image,function(Img) {
+    block_image_object= Img;
+    
+    block_image_object.scaleToWidth(block_image_width);
+    block_image_object.scaleToHeight(block_image_height);
+    block_image_object.set({
+        top:player_y,
+        left:player_x
+
+    });
+    canvas.add(block_image_object);
     });
 }
-window.addEventListener("keydown", mykeydown);
-function mykeydown(e){
-    keypressed = e.keyCode;
-    console.log(keypressed);
+
+window.addEventListener("keydown",my_keydown);
+
+function my_keydown(e)
+{
     keyPressed= e.keyCode;
     if(e.shiftKey == true && keyPressed == '80')
     {
@@ -67,61 +62,49 @@ function mykeydown(e){
         document.getElementById("current_height").innerHTML=block_image_height;
         document.getElementById("current_width").innerHTML=block_image_width;
     }
-    
-    if (keypressed=='38') {
-        up1();
-        console.log("up");
-    }
-    if (keypressed=='40') {
-        down1();
-        console.log("down");
-    }
-    if (keypressed=='37') {
-        left1();
+    if (keyPressed == '37')
+    {
+        left();
         console.log("left");
     }
-    if (keypressed=='39') {
-        right1();
+    if (keyPressed == '38')
+    {
+        up();
+        console.log("up");
+    }
+    if (keyPressed == '40')
+    {
+        down();
+        console.log("down");
+    }
+    if (keyPressed == '39')
+    {
+        right();
         console.log("right");
     }
-    if (keypressed=='87') {
-        new_web_update();
-        console.log("web");
+    if (keyPressed == '70')
+    {
+        new_image('ironman_face.png');
+        console.log("f");
     }
-}
-function up1() {
-    if (hero_y > 0) {
-        hero_y = hero_y-10;
-        console.log("The hero's X is = "+ hero_x +" and Y is = " + hero_y);
-        canvas.remove(hero_obj);
-        uploadBackground();
-        hero_update();
+    if (keyPressed == '66')
+    {
+        new_image('spiderman_body.png');
+        console.log("b");
     }
-}
-function down1() {
-    if (hero_y < 500) {
-        hero_y = hero_y+10;
-        console.log("The hero's X is = "+ hero_x +" and Y is = " + hero_y);
-        canvas.remove(hero_obj);
-        uploadBackground();
-        hero_update();
+    if (keyPressed == '76')
+    {
+        new_image('hulk_legs.png');
+        console.log("l");
     }
-}
-function left1() {
-    if (hero_x > 0) {
-        hero_x = hero_x-10;
-        console.log("The hero's X is = "+ hero_x +" and Y is = " + hero_y);
-        canvas.remove(hero_obj);
-        uploadBackground();
-        hero_update();
+    if (keyPressed == '82')
+    {
+        new_image('thor_right_hand.png');
+        console.log("r");
     }
-}
-function right1() {
-    if (hero_x < 900) {
-        hero_x = hero_x+10;
-        console.log("The hero's X is = "+ hero_x +" and Y is = " + hero_y);
-        canvas.remove(hero_obj);
-        uploadBackground();
-        hero_update();
+    if (keyPressed == '72')
+    {
+        new_image('captain_america_left_hand.png');
+        console.log("h");
     }
 }
